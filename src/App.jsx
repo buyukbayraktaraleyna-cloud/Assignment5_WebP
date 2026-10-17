@@ -1,14 +1,30 @@
 import React, { useState } from 'react';
 import ProductList from './components/ProductList';
 
-// App component managing main state and controlled form inputs
+// App component managing product state and adding new items
 export default function App() {
+  const [products, setProducts] = useState([
+    { id: 1, title: "Laptop", price: 1200 },
+    { id: 2, title: "Phone", price: 800 },
+    { id: 3, title: "Tablet", price: 600 }
+  ]);
+
   const [productName, setProductName] = useState('');
   const [productPrice, setProductPrice] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("New Product:", { productName, productPrice });
+    if (!productName || !productPrice) return;
+
+    const newProduct = {
+      id: Date.now(),
+      title: productName,
+      price: Number(productPrice)
+    };
+
+    setProducts([...products, newProduct]);
+    setProductName('');
+    setProductPrice('');
   };
 
   return (
@@ -36,7 +52,7 @@ export default function App() {
         <button type="submit">Add Product</button>
       </form>
 
-      <ProductList />
+      <ProductList products={products} />
     </div>
   );
 }
