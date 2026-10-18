@@ -2,9 +2,9 @@ import React from 'react';
 import Card from './Card';
 
 function Product(props) {
-  // Hem props.product hem de doğrudan props.name / props.price durumunu destekler
-  const name = props.name || props.product?.name;
-  const price = props.price || props.product?.price;
+  // Gelen verinin prop adını yakalayamama ihtimaline karşı tüm yolları deniyoruz
+  const name = props.name || props.title || props.product?.name || props.product?.title || props.item?.name || "Ürün";
+  const price = props.price || props.product?.price || props.item?.price || 0;
 
   return (
     <Card>
