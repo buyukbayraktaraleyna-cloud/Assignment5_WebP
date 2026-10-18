@@ -1,14 +1,15 @@
 import React from 'react';
 import Card from './Card';
 
-function Product({ product, name, price }) {
-  const productName = product?.name || name;
-  const productPrice = product?.price || price;
+function Product(props) {
+  // Hem props.product hem de doğrudan props.name / props.price durumunu destekler
+  const name = props.name || props.product?.name;
+  const price = props.price || props.product?.price;
 
   return (
     <Card>
-      <h3>{productName}</h3>
-      <p>Price: ${productPrice}</p>
+      <h3>{name}</h3>
+      <p>Price: ${price}</p>
     </Card>
   );
 }
